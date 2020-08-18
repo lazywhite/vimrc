@@ -55,13 +55,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
 
 " 用来提供一个导航目录的侧边栏
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 
 " 可以使 nerdtree Tab 标签的名称更友好些
-Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'jistr/vim-nerdtree-tabs'
 
 " 可以在导航目录中看到 git 版本信息
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " 查看当前代码文件中的变量和函数列表的插件，
 " 可以切换和跳转到代码中对应的变量和函数的位置
@@ -106,6 +106,10 @@ Plug 'xuhdev/SingleCompile'
 
 Plug 'ervandew/supertab'
 " 插件结束的位置，插件全部放在此行上面
+"
+" for yaml
+Plug 'chase/vim-ansible-yaml'
+
 call plug#end()
 
 
@@ -151,9 +155,9 @@ map <F10> :NERDTreeToggle<CR>
 " 显示行号
 let NERDTreeShowLineNumbers=1
 " 打开文件时是否显示目录
-let NERDTreeAutoCenter=1
+let NERDTreeAutoCenter=0
 " 是否显示隐藏文件
-let NERDTreeShowHidden=0
+let NERDTreeShowHidden=1
 " 设置宽度
 " let NERDTreeWinSize=31
 " 忽略一下文件的显示
@@ -300,3 +304,8 @@ nmap <F6> :SCCompileRun<cr>
 ""inoremap ( ()<ESC>ha
 ""inoremap " ""<ESC>ha
 ""inoremap ' ''<ESC>ha
+
+
+
+" add ansible yaml filetype
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=ansible
