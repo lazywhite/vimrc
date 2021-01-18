@@ -1,3 +1,5 @@
+set ts=4 sts=4 sw=4 et ai nu
+
 "==============================================================================
 " vim 内置配置 
 "==============================================================================
@@ -9,15 +11,9 @@
 " 关闭兼容模式
 set nocompatible
 
-set nu " 设置行号
 set cursorline "突出显示当前行
 " set cursorcolumn " 突出显示当前列
 set showmatch " 显示括号匹配
-
-" tab 缩进
-set tabstop=4 " 设置Tab长度为4空格
-set shiftwidth=4 " 设置自动缩进长度为4空格
-set autoindent " 继承前一行的缩进方式，适用于多行注释
 
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";" 
@@ -64,10 +60,10 @@ Plug 'junegunn/vim-easy-align'
 " 查看当前代码文件中的变量和函数列表的插件，
 " 可以切换和跳转到代码中对应的变量和函数的位置
 " 大纲式导航, Go 需要 https://github.com/jstemmer/gotags 支持
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 " 自动补全括号的插件，包括小括号，中括号，以及花括号
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
 Plug 'vim-airline/vim-airline'
@@ -76,7 +72,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'ianva/vim-youdao-translater'
 
 " 代码自动完成，安装完插件还需要额外配置才可以使用
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe', { 'commit':'d98f896' }
 
 " 可以在文档中显示 git 信息
 Plug 'airblade/vim-gitgutter'
@@ -90,9 +87,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " go 主要插件
-Plug 'fatih/vim-go', { 'tag': '*' }
+" Plug 'fatih/vim-go', { 'tag': '*' }
 " go 中的代码追踪，输入 gd 就可以自动跳转
-Plug 'dgryski/vim-godef'
+" Plug 'dgryski/vim-godef'
 
 " markdown 插件
 " Plug 'iamcco/mathjax-support-for-mkdp'
@@ -106,7 +103,7 @@ Plug 'ervandew/supertab'
 " 插件结束的位置，插件全部放在此行上面
 "
 " for yaml
-Plug 'chase/vim-ansible-yaml'
+" Plug 'chase/vim-ansible-yaml'
 
 call plug#end()
 
@@ -127,21 +124,21 @@ set background=dark " 主题背景 dark-深色; light-浅色
 "==============================================================================
 " vim-go 插件
 "==============================================================================
-let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-
-let g:go_version_warning = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_generate_tags = 1
-
-let g:godef_split=2
+"let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+"let g:go_autodetect_gopath = 1
+"let g:go_list_type = "quickfix"
+"
+"let g:go_version_warning = 1
+"let g:go_highlight_types = 1
+"let g:go_highlight_fields = 1
+"let g:go_highlight_functions = 1
+"let g:go_highlight_function_calls = 1
+"let g:go_highlight_operators = 1
+"let g:go_highlight_extra_types = 1
+"let g:go_highlight_methods = 1
+"let g:go_highlight_generate_tags = 1
+"
+"let g:godef_split=2
 
 
 "==============================================================================
@@ -237,13 +234,13 @@ let g:SuperTabDefaultCompletionType = '<c-n>'
 ""let g:UltiSnipsJumpForwardTrigger = "<tab>"
 ""let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
+
 "==============================================================================
 "  有道翻译插件
 "==============================================================================
 vnoremap <silent> <C-T> :<C-u>Ydv<CR>
 nnoremap <silent> <C-T> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
-
 
 "==============================================================================
 "  其他插件配置
@@ -312,5 +309,7 @@ nmap <F6> :SCCompileRun<cr>
 
 
 
-" add ansible yaml filetype
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=ansible
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yaml let b:did_indent = 1
