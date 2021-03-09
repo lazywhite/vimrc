@@ -11,7 +11,7 @@ set ts=4 sts=4 sw=4 et ai nu
 " 关闭兼容模式
 set nocompatible
 
-set cursorline "突出显示当前行
+" set cursorline "突出显示当前行
 " set cursorcolumn " 突出显示当前列
 set showmatch " 显示括号匹配
 
@@ -44,67 +44,17 @@ au InsertLeave *.go,*.sh,*.php write
 " 插件开始的位置
 call plug#begin('~/.vim/plugged')
 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-" 可以快速对齐的插件
-Plug 'junegunn/vim-easy-align'
-
-" 用来提供一个导航目录的侧边栏
-"Plug 'scrooloose/nerdtree'
-
-" 可以使 nerdtree Tab 标签的名称更友好些
-"Plug 'jistr/vim-nerdtree-tabs'
-
-" 可以在导航目录中看到 git 版本信息
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" 查看当前代码文件中的变量和函数列表的插件，
-" 可以切换和跳转到代码中对应的变量和函数的位置
-" 大纲式导航, Go 需要 https://github.com/jstemmer/gotags 支持
-" Plug 'majutsushi/tagbar'
-
-" 自动补全括号的插件，包括小括号，中括号，以及花括号
-Plug 'jiangmiao/auto-pairs'
-
-" Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
-Plug 'vim-airline/vim-airline'
-
 " 有道词典在线翻译
-Plug 'ianva/vim-youdao-translater'
+" Plug 'ianva/vim-youdao-translater'
 
-" 代码自动完成，安装完插件还需要额外配置才可以使用
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'Valloric/YouCompleteMe', { 'commit':'d98f896' }
-
-" 可以在文档中显示 git 信息
-Plug 'airblade/vim-gitgutter'
-
-
-" 下面两个插件要配合使用，可以自动生成代码块
-""Plug 'SirVer/ultisnips'
-""Plug 'honza/vim-snippets'
-
-" 配色方案
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-
-" go 主要插件
-" Plug 'fatih/vim-go', { 'tag': '*' }
-" go 中的代码追踪，输入 gd 就可以自动跳转
-" Plug 'dgryski/vim-godef'
-
-" markdown 插件
-" Plug 'iamcco/mathjax-support-for-mkdp'
-" Plug 'iamcco/markdown-preview.vim'
-"
 Plug 'xuhdev/SingleCompile'
 
-
-
 Plug 'ervandew/supertab'
-" 插件结束的位置，插件全部放在此行上面
-"
-" for yaml
-" Plug 'chase/vim-ansible-yaml'
 
+" enhanced vimdiff
+Plug 'chrisbra/vim-diff-enhanced'
+
+" 插件结束的位置，插件全部放在此行上面
 call plug#end()
 
 
@@ -116,108 +66,7 @@ call plug#end()
 " set termguicolors
 set t_Co=256
 " 配色方案, 可以从上面插件安装中的选择一个使用 
-colorscheme onehalfdark " 主题
-let g:airline_theme='onehalfdark'
-set background=dark " 主题背景 dark-深色; light-浅色
-
-
-"==============================================================================
-" vim-go 插件
-"==============================================================================
-"let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
-"let g:go_autodetect_gopath = 1
-"let g:go_list_type = "quickfix"
-"
-"let g:go_version_warning = 1
-"let g:go_highlight_types = 1
-"let g:go_highlight_fields = 1
-"let g:go_highlight_functions = 1
-"let g:go_highlight_function_calls = 1
-"let g:go_highlight_operators = 1
-"let g:go_highlight_extra_types = 1
-"let g:go_highlight_methods = 1
-"let g:go_highlight_generate_tags = 1
-"
-"let g:godef_split=2
-
-
-"==============================================================================
-" NERDTree 插件
-"==============================================================================
-
-" 打开和关闭NERDTree快捷键
-map <F10> :NERDTreeToggle<CR>
-" 显示行号
-let NERDTreeShowLineNumbers=1
-" 打开文件时是否显示目录
-let NERDTreeAutoCenter=0
-" 是否显示隐藏文件
-let NERDTreeShowHidden=1
-" 设置宽度
-" let NERDTreeWinSize=31
-" 忽略一下文件的显示
-let NERDTreeIgnore=['\.pyc','\~$','\.swp']
-" 打开 vim 文件及显示书签列表
-let NERDTreeShowBookmarks=2
-
-" 在终端启动vim时，共享NERDTree
-let g:nerdtree_tabs_open_on_console_startup=1
-
-
-"==============================================================================
-"  majutsushi/tagbar 插件
-"==============================================================================
-
-" majutsushi/tagbar 插件打开关闭快捷键
-nmap <F9> :TagbarToggle<CR>
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-
-"==============================================================================
-"  nerdtree-git-plugin 插件
-"==============================================================================
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
-
-let g:NERDTreeShowIgnoredStatus = 1
-
+set background=light " 主题背景 dark-深色; light-浅色
 
 
 "==============================================================================
@@ -229,10 +78,6 @@ let g:NERDTreeShowIgnoredStatus = 1
 ""let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<c-n>'
 
-" better key bindings for UltiSnipsExpandTrigger
-""let g:UltiSnipsExpandTrigger = "<tab>"
-""let g:UltiSnipsJumpForwardTrigger = "<tab>"
-""let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 "==============================================================================
@@ -242,57 +87,6 @@ vnoremap <silent> <C-T> :<C-u>Ydv<CR>
 nnoremap <silent> <C-T> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
 
-"==============================================================================
-"  其他插件配置
-"==============================================================================
-
-" markdwon 的快捷键
-" map <silent> <F5> <Plug>MarkdownPreview
-" map <silent> <F6> <Plug>StopMarkdownPreview
-
-" tab 标签页切换快捷键
-:nn <Leader>1 1gt
-:nn <Leader>2 2gt
-:nn <Leader>3 3gt
-:nn <Leader>4 4gt
-:nn <Leader>5 5gt
-:nn <Leader>6 6gt
-:nn <Leader>7 7gt
-:nn <Leader>8 8gt
-:nn <Leader>9 8gt
-:nn <Leader>0 :tablast<CR>
-
-
-"==============================================================================
-" GVim 的配置
-"==============================================================================
-" 如果不使用 GVim ，可以不用配置下面的配置
-if has('gui_running')
-        colorscheme one
-    " 设置启动时窗口的大小
-    set lines=999 columns=999 linespace=4
-
-    " 设置字体及大小
-        set guifont=Roboto\ Mono\ 13
-
-    set guioptions-=m " 隐藏菜单栏
-    set guioptions-=T " 隐藏工具栏
-    set guioptions-=L " 隐藏左侧滚动条
-    set guioptions-=r " 隐藏右侧滚动条
-    set guioptions-=b " 隐藏底部滚动条
-            " 在 gvim 下不会和 terminal 的 alt+数字的快捷键冲突，
-    " 所以将 tab 切换配置一份 alt+数字的快捷键
-    :nn <M-1> 1gt
-    :nn <M-2> 2gt
-    :nn <M-3> 3gt
-    :nn <M-4> 4gt
-    :nn <M-5> 5gt
-    :nn <M-6> 6gt
-    :nn <M-7> 7gt
-    :nn <M-8> 8gt
-        :nn <M-9> 9gt
-        :nn <M-0> :tablast<CR>
-endif
 
 
 " singleCompile 
@@ -301,15 +95,14 @@ nmap <F6> :SCCompileRun<cr>
 
 
 
-""inoremap { {}<ESC>ha
-""inoremap [ []<ESC>ha
-""inoremap ( ()<ESC>ha
-""inoremap " ""<ESC>ha
-""inoremap ' ''<ESC>ha
-
-
-
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType yaml let b:did_indent = 1
+
+
+" ============= enhanced vim diff =============
+" ==== 如果vim的版本不小于8.1.0360, 则无需这个插件了
+if has("patch-8.1.0360")
+    set diffopt+=internal,algorithm:patience
+endif
