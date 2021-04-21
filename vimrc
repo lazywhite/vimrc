@@ -34,9 +34,6 @@ syntax enable
 syntax on                    " 开启文件类型侦测
 filetype plugin indent on    " 启用自动补全
 
-" 退出插入模式指定类型的文件自动保存
-au InsertLeave *.go,*.sh,*.php write
-
 "==============================================================================
 " 插件配置 
 "==============================================================================
@@ -45,14 +42,11 @@ au InsertLeave *.go,*.sh,*.php write
 call plug#begin('~/.vim/plugged')
 
 " 有道词典在线翻译
-" Plug 'ianva/vim-youdao-translater'
+Plug 'ianva/vim-youdao-translater'
 
 Plug 'xuhdev/SingleCompile'
 
 Plug 'ervandew/supertab'
-
-" enhanced vimdiff
-Plug 'chrisbra/vim-diff-enhanced'
 
 " 插件结束的位置，插件全部放在此行上面
 call plug#end()
@@ -65,19 +59,10 @@ call plug#end()
 " 开启24bit的颜色，开启这个颜色会更漂亮一些
 " set termguicolors
 set t_Co=256
+" 列出自带配色方案 ls /usr/share/nvim/runtime/colors/
+colorscheme delek
 " 配色方案, 可以从上面插件安装中的选择一个使用 
-set background=light " 主题背景 dark-深色; light-浅色
-
-
-"==============================================================================
-"  Valloric/YouCompleteMe 插件
-"==============================================================================
-
-" make YCM compatible with UltiSnips (using supertab)
-""let g:ycm_key_list_select_completion = ['<c-n>', '<space>']
-""let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<c-n>'
-
+" set background=light " 主题背景 dark-深色; light-浅色
 
 
 "==============================================================================
@@ -86,7 +71,6 @@ let g:SuperTabDefaultCompletionType = '<c-n>'
 vnoremap <silent> <C-T> :<C-u>Ydv<CR>
 nnoremap <silent> <C-T> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
-
 
 
 " singleCompile 
@@ -99,10 +83,3 @@ nmap <F6> :SCCompileRun<cr>
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType yaml let b:did_indent = 1
-
-
-" ============= enhanced vim diff =============
-" ==== 如果vim的版本不小于8.1.0360, 则无需这个插件了
-if has("patch-8.1.0360")
-    set diffopt+=internal,algorithm:patience
-endif
