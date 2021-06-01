@@ -20,6 +20,7 @@ export PATH=/share/bin:$PATH
 export PATH=/usr/local/jdk-16.0.1/bin:$PATH
 export PATH=/usr/local/apache-maven-3.8.1/bin:$PATH
 export PATH=/usr/local/gradle-7.0/bin:$PATH
+#export PATH=/$PATH:usr/local/python3.9.5/bin
 
 
 
@@ -32,18 +33,16 @@ alias kcd="kubectl describe"
 alias kcga="kubectl get -A"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+alias rehash="hash -r"
 
+#kubectl completion bash >/etc/bash_completion.d/kubectl
+#svcat completion bash >/etc/bash_completion.d/svcat
 
-source <(kubectl completion bash) 
-source <(svcat completion bash) 
-
-complete -C /root/bin/aliyun aliyun
-
+#complete -C /root/bin/aliyun aliyun
+#complete -C /root/go/bin/mc mc
 
 export WORKON_HOME=~/envs
 source /usr/local/bin/virtualenvwrapper.sh
-
-complete -C /root/go/bin/mc mc
 
 
 parse_git_branch() {
@@ -63,6 +62,7 @@ export KUBECONFIG=/root/.kube/config
 
 # 激活k8s环境
 function useenv() {
+    #sgvpn.sh $1
     source /share/k8s-envs/$1/profile
 }
 # 离开k8s环境
